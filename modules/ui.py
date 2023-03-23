@@ -407,12 +407,12 @@ def create_output_panel(tabname, outdir):
 def create_sampler_and_steps_selection(choices, tabname):
     if opts.samplers_in_dropdown:
         with FormRow(elem_id=f"sampler_selection_{tabname}"):
-            sampler_index = gr.Dropdown(label='Sampling method', elem_id=f"{tabname}_sampling", choices=[x.name for x in choices], value=choices[0].name, type="index")
+            sampler_index = gr.Dropdown(label='Sampling method', elem_id=f"{tabname}_sampling", choices=[x.name for x in choices], value=choices[14].name, type="index")
             steps = gr.Slider(minimum=1, maximum=150, step=1, elem_id=f"{tabname}_steps", label="Sampling steps", value=20)
     else:
         with FormGroup(elem_id=f"sampler_selection_{tabname}"):
             steps = gr.Slider(minimum=1, maximum=150, step=1, elem_id=f"{tabname}_steps", label="Sampling steps", value=20)
-            sampler_index = gr.Radio(label='Sampling method', elem_id=f"{tabname}_sampling", choices=[x.name for x in choices], value=choices[0].name, type="index")
+            sampler_index = gr.Radio(label='Sampling method', elem_id=f"{tabname}_sampling", choices=[x.name for x in choices], value=choices[14].name, type="index")
 
     return steps, sampler_index
 
@@ -477,7 +477,7 @@ def create_ui():
                         with FormRow():
                             with gr.Column(elem_id="txt2img_column_size", scale=4):
                                 width = gr.Slider(minimum=64, maximum=2048, step=8, label="Width", value=512, elem_id="txt2img_width")
-                                height = gr.Slider(minimum=64, maximum=2048, step=8, label="Height", value=512, elem_id="txt2img_height")
+                                height = gr.Slider(minimum=64, maximum=2048, step=8, label="Height", value=768, elem_id="txt2img_height")
 
                             res_switch_btn = ToolButton(value=switch_values_symbol, elem_id="txt2img_res_switch_btn")
                             if opts.dimensions_and_batch_together:
@@ -486,7 +486,7 @@ def create_ui():
                                     batch_size = gr.Slider(minimum=1, maximum=8, step=1, label='Batch size', value=1, elem_id="txt2img_batch_size")
 
                     elif category == "cfg":
-                        cfg_scale = gr.Slider(minimum=1.0, maximum=30.0, step=0.5, label='CFG Scale', value=7.0, elem_id="txt2img_cfg_scale")
+                        cfg_scale = gr.Slider(minimum=1.0, maximum=30.0, step=0.5, label='CFG Scale', value=8.0, elem_id="txt2img_cfg_scale")
 
                     elif category == "seed":
                         seed, reuse_seed, subseed, reuse_subseed, subseed_strength, seed_resize_from_h, seed_resize_from_w, seed_checkbox = create_seed_inputs('txt2img')
